@@ -1,0 +1,8 @@
+So there's 2 ways about implementing the autoformatting with spaces and \n
+- 1) use elisp insert text to insert spaces and new lines in the right places
+    - this needs us to keep track of how previous insertions change the indices of later text (although if we just keep track of the indices in the final text, it will work)
+- 2) use elisp delete-region or erase-buffer + insert text to replace text 
+
+the first way might be more optimised for larger text files idk?
+- the way we have structured in Python right now favours delete, replace even though it is less elegant
+- 

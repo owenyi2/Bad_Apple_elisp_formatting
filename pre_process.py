@@ -13,12 +13,12 @@ def black_white(img):
     return (~np.round(img / 255).astype(bool)).astype(int)
 
 def to_ascii(img):
-    with open("temp.txt", "w") as f:
+    with open("shitty_ascii.txt", "w") as f:
         write = "\n".join(["".join([" " if x == 0 else '#' for x in row]) for row in img])
         f.write(write)
 
 def to_text(img):
-    with open("temp1.txt", "w") as f:
+    with open("python_list.txt", "w") as f:
         f.write(str(img.tolist()))
 
 def to_plot(img):
