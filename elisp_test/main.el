@@ -1,0 +1,11 @@
+(progn
+(defun times_seven (n)
+  (* 7 n)
+  )
+
+(times_seven 1)
+
+(goto-char 3)
+(insert "helloworld")
+
+)

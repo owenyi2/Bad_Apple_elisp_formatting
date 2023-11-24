@@ -1,0 +1,181 @@
+*** Welcome to IELM ***  Type (describe-mode) or press <f1> m for help.
+ELISP> 345
+345 (#o531, #x159)
+ELISP> 3.14
+3.14
+ELISP> "hello"
+"hello"
+ELISP> (+ 2 2)
+4 (#o4, #x4, ?\C-d)
+ELISP> (+ 4 5 9)
+18 (#o22, #x12, ?\C-r)
+ELISP> (+ 4 (- 10 4))
+10 (#o12, #xa, ?\C-j)
+ELISP> (defun add-nums (a b) + a b)
+add-nums
+ELISP> (add-nums (1 3))
+*** Eval error ***  Invalid function: 1
+ELISP> (defun add-nums (a b) (+ a b))
+add-nums
+ELISP> (add-nums 1 3))
+*** IELM error ***  More than one sexp in input
+ELISP> (add-nums 1 3)
+4 (#o4, #x4, ?\C-d)
+ELISP> (setq my-var 90)
+90 (#o132, #x5a, ?Z)
+ELISP> (setq my-var 90 my-other-var 10)
+10 (#o12, #xa, ?\C-j)
+ELISP> (+ my-var my-other-var)
+100 (#o144, #x64, ?d)
+ELISP> t
+t
+ELISP> nil
+nil
+ELISP> (null nil)
+t
+ELISP> (null t)
+nil
+ELISP> (& t nil)
+*** Eval error ***  Symbol’s function definition is void: &
+ELISP> (and t nil)
+nil
+ELISP> (or t nil)
+t
+ELISP> '(1 2 3 4)
+(1 2 3 4)
+
+ELISP> (setq my-list '(1 2 3 4))
+(1 2 3 4)
+
+ELISP> (equal nil '())
+t
+ELISP> (add-to-list 'my-list 4)
+(1 2 3 4)
+
+ELISP> my-list
+(1 2 3 4)
+
+ELISP> (setq my-list '(1 2 3))
+(1 2 3)
+
+ELISP> (add-to-list 'my-list 4)
+(4 1 2 3)
+
+ELISP> (setq my-list '(1 2 3 4))
+(1 2 3 4)
+
+ELISP> (add-to-list 'my-list 4)
+(1 2 3 4)
+
+ELISP> (add-to-list 'my-list 5)
+(5 1 2 3 4)
+
+ELISP> (add-to-list 'my-list 4)
+(5 1 2 3 4)
+
+ELISP> (add-to-list 'my-list 3)
+(5 1 2 3 4)
+
+ELISP> my-list
+(5 1 2 3 4)
+
+ELISP> (car my-list)
+5 (#o5, #x5, ?\C-e)
+ELISP> (cdr my-list)
+(1 2 3 4)
+
+ELISP> (nth 0 my-list)
+5 (#o5, #x5, ?\C-e)
+ELISP> (nth 3 my-list)
+3 (#o3, #x3, ?\C-c)
+ELISP> (member 4 my-list)
+(4)
+
+ELISP> (member 8 my-list)
+nil
+ELISP> (setq my-list (1, 2, 3)) 
+*** Eval error ***  Invalid function: 1
+ELISP> (setq my-list '(1 2 3)) 
+(1 2 3)
+
+ELISP> my-list
+(1 2 3)
+
+ELISP> (member 3 my-list)
+(3)
+
+ELISP> member( 2 my-list)
+*** IELM error ***  More than one sexp in input
+ELISP> (member 2 my-list)
+(2 3)
+
+ELISP> (member 1 my-list)
+(1 2 3)
+
+ELISP> (add-to-list 'my-list 5)  
+(5 1 2 3)
+
+ELISP> (add-to-list 'my-list 3)  
+(5 1 2 3)
+
+ELISP> (add-to-list my-list 3)  
+*** Eval error ***  Wrong type argument: symbolp, (5 1 2 3)
+ELISP> (add-to-list 'my-list 2)  
+(5 1 2 3)
+
+ELISP> 'my-list
+my-list
+ELISP> my-list
+(5 1 2 3)
+
+ELISP> (add-to-list 'my-list 4)
+(4 5 1 2 3)
+
+ELISP> (defun does-exists (number some-list))
+does-exists
+ELISP> (does-exist 8 my-list)
+*** Eval error ***  Symbol’s function definition is void: does-exist
+ELISP> (does-exists 8 my-list)
+nil
+ELISP> (does-exists 2 my-list)
+nil
+ELISP> (defun does-exists (number some-list) (member number some-list))
+does-exists
+ELISP> (does-exists 2 my-list)
+(2 3)
+
+ELISP> (does-exists 8 my-list)
+nil
+ELISP> (setq my-list '(1 2 3 4))
+(1 2 3 4)
+
+ELISP> (dolist (e my-list) (when (= (mod e 2) 0) (print pizza))
+)
+*** Eval error ***  Symbol’s value as variable is void: pizza
+ELISP> (dolist (e my-list) (when (= (mod e 2) 0) (print 'pizza e))
+)
+
+pizza
+
+pizza
+
+nil
+ELISP> (dolist (e my-list) (when (= (mod e 2) 0) (print 'pizza e)))
+*** Eval error ***  Invalid function: 2
+ELISP> (dolist (e my-list) (when (= (mod e 2) 0) (print ('pizza e))))
+*** Eval error ***  Invalid function: 'pizza
+ELISP> (dolist (e my-list) (when (= (mod e 2) 0) (print '('pizza e))))
+
+('pizza e)
+
+('pizza e)
+
+nil
+ELISP> (let (some-var) (when (null some-var) (message "var is null")))
+"var is null"
+ELISP> (let ((some-var 0) (other-var 90)) (if (null some-var) (message "Not Suppose to happen") (message "Yay")))
+"Yay"
+ELISP> (let ((some-var 0) (other-var 90)) (if (null some-var) (message "Not Suppose to happen") (message "Yay")(message "no")))
+
+"no"
+ELISP> 

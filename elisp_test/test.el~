@@ -1,0 +1,37 @@
+(require 'cl-lib)
+
+(defun read-file (file)
+  "read file by name FILE and return content as string"
+  (with-temp-buffer
+    (insert-file-contents file)
+    (goto-char (point-min))
+    (buffer-string)
+    )
+  )
+
+(defun read-list-from-file (file)
+  "read file by name FILE containing a lisp list string and return evaluated lisp list"
+  (eval (car (read-from-string (read-file file))))
+  )
+
+(defun percent-similarity (list-a list-b)
+  "given two lists of integers LIST-A LIST-B of equal length, calculate how many indexes common"
+  (/ (apply '+
+	    (mapcar (lambda (x) (if x 1 0)) (cl-mapcar 'equal list-a list-b))
+	    )
+     (float (length list-a))
+  )
+  )
+
+(defun pad-list-to-length (list length)
+  "given LIST pad 0's to right until correct LENGTH. LENGTH must be longer than length of LIST"
+  (append list (make-list (- length (length list)) 0))
+ )
+
+(read-file "../lorem_ipsum.txt")
+(read-list-from-file "../lisp_list.txt")
+
+
+
+
+

@@ -6,3 +6,5 @@ So there's 2 ways about implementing the autoformatting with spaces and \n
 the first way might be more optimised for larger text files idk?
 - the way we have structured in Python right now favours delete, replace even though it is less elegant
 - 
+
+ok so right now we have some of the finicky but necessary functions translated into lisp 
