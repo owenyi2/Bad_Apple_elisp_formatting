@@ -17,9 +17,13 @@ def to_ascii(img):
         write = "\n".join(["".join([" " if x == 0 else '#' for x in row]) for row in img])
         f.write(write)
 
-def to_text(img):
+def to_text_python_list(img):
     with open("python_list.txt", "w") as f:
         f.write(str(img.tolist()))
+
+def to_text_lisp_list(img):
+    with open("lisp_list.txt", "w") as f:
+        f.write("'" + str(img.tolist()).replace(", ", " ").replace("[", "(").replace("]", ")"))
 
 def to_plot(img):
     plt.imshow(img, cmap='Greys')
@@ -30,5 +34,6 @@ img = resize(img, HORI_RES, ASPECT)
 img = black_white(img)
 
 to_ascii(img)
-to_text(img)
+to_text_python_list(img)
+to_text_lisp_list(img)
 to_plot(img)
