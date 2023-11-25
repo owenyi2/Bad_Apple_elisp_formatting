@@ -1,6 +1,0 @@
-(let ((i 1))
-  (while (< i 520)
-    (print (format "~/Desktop/Code Projects/Python/Bad_Apple/Autoformatter/output/wrapped_output_%d.txt" i))
-    )
-  (setq i (+1 i))
-  )
