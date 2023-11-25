@@ -66,19 +66,50 @@
     
     (setq i (1+ i))
     )
+
+  (if (< word_count (length text_list))
+      (setq full_wrapped_text (concat full_wrapped_text "\n" (mapconcat 'identity (cl-subseq text_list word_count (length text_list)) " ")))
+      
+    
+     
+      )
   
-  (switch-to-buffer "*scratch*")
-  (erase-buffer)
-  (goto-char (point-min))
-  (insert full_wrapped_text)
+  full_wrapped_text
+  )
+
+(defun main ()
+  (setq folder_path "/Users/owenyi/Desktop/Code Projects/Python/Bad_Apple/Autoformatter/")
+  (setq bad_apple_frame_list (read-list-from-file (concat folder_path "lisp_list.txt")))
+
+  (setq text_list (split-string (buffer-substring-no-properties (point-min) (point-max))))
+
+  (setq frame_number 0)
   
+  (global-font-lock-mode 0)
+  
+  (dolist (bad_apple_frame bad_apple_frame_list)
+   
+    (setq wrapped_text (create_wrapped_text bad_apple_frame text_list))
+    
+    (print frame_number)
+
+    (switch-to-buffer "*scratch*")
+    (goto-char (point-min))
+
+    (text-scale-set 1)
+    (text-scale-decrease 7)
+    (erase-buffer) 
+    (insert wrapped_text)
+
+    (print wrapped_text)
+    (setq frame_number (1+ frame_number))
+    (sit-for (/ 1 29.97))
+    
+    )
+
   (switch-to-buffer (other-buffer))
   )
 
-(setq folder_path "/Users/owenyi/Desktop/Code Projects/Python/Bad_Apple/Autoformatter/")
-(setq bad_apple_frame (read-list-from-file (concat folder_path "lisp_list.txt")))
-(setq text_list (split-string (read-file (concat folder_path "lorem_ipsum.txt"))))
+;; and here is the entry point
 
-
-(create_wrapped_text bad_apple_frame text_list)
-
+(main)
