@@ -17,14 +17,19 @@
     "; grab the next WORD_LEN pixels from ROW so to determine if there's enough white pixel to add the next WORD"
     (setq look_ahead (pad-list-to-length (cl-subseq row pixel_count (min (length row) (+ pixel_count word_len))) word_len)) 
 
-    (if (> (/(apply '+ look_ahead) (length look_ahead)) .55)
+    (if (> (/(apply '+ look_ahead) (float (length look_ahead))) .7)
     (progn
       (setq wrapped_line (concat wrapped_line word)) "; add WORD"
-      (setq word_count (1+ word_count))
+      (setq word_count (% (1+ word_count) (length text_list)))
       (setq pixel_count (+ pixel_count word_len))
       )
-    (setq wrapped_line (concat wrapped_line " ")) "; add ' '"
-    (setq pixel_count (1+ pixel_count))
+    (setq num_space (max 1 (or (cl-position 1 look_ahead) word_len)))
+
+    (setq wrapped_line (concat wrapped_line (mapconcat 'identity (make-list num_space " "))))
+    (setq pixel_count (+ pixel_count num_space))
+    
+    ;(setq wrapped_line (concat wrapped_line " ")) "; add ' '" 
+    ;(setq pixel_count (1+ pixel_count))
     )
 
     
@@ -104,7 +109,8 @@
     (setq frame_number (1+ frame_number))
     
     (setq frame_time (- (float-time) frame_start_time))
-    (sit-for (max 0 (- (/ 1 29.97) frame_time)))
+    (print frame_time)
+    (sit-for (max 0 (- (/ 1 45) frame_time)))
     
     (switch-to-buffer "*temporary*")
     "; iterate line-by-line in *temporary* to flip through each bad apple frame"
@@ -121,5 +127,4 @@
 
 ";; Note that comments are encapsulated in quotes to allow breaking across lines"
 ";; Our script is too short to cover the entire frame so I'm going to go spam the above function defintions below"
-
 

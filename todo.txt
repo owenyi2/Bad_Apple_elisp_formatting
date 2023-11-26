@@ -1,0 +1,12 @@
+- Time between frames 
+    - figure out how long it takes for each frame
+    - try to 1) reduce variance and 2) reduce mean
+        - best case scenario is reduce mean so it is fast enough for realtime
+        - next best case is reduce variance enough so that we can speed it up in post and still look alright
+    - Right now I suspect that the lag is due to computing spacing because frames with large white space take a long time due to the while loop in wrapping the text   
+        - lot's of white space means the code has to keep on scanning pixel by pixel while if it had words to fill then it could scan multiple pixels at a time
+        - could probably optimise by scanning for large amounts of whitespace and then skipping that
+            - e.g. if look_ahead is like 5 0's then sub in "     " and then increment pixel_count by 5 
+- Add in original bad apple frames to play in a buffer in a corner window
+- Add in music using EMMS
+- Record and send it
